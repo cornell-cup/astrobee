@@ -1,6 +1,7 @@
 from .pins import *
 from .dc_motor_group import DCMotorGroup
 from .servo import Servo
+from .imu import IMU
 import time
 import math 
 
@@ -23,11 +24,12 @@ class YController:
                 Servo.get_default_servo(2),
                 Servo.get_default_servo(8),
                 Servo.get_default_servo(4),
-                Servo.get_default_servo(10)
+                Servo.get_default_servo(10), 
+                IMU.get_default_imu()
             )
         return cls._DEFAULT_Y_CONTROLLER_INSTANCE
 
-    def __init__(self, servo_three: Servo, servo_nine: Servo, servo_one: Servo, servo_seven: Servo, servo_two: Servo, servo_eight: Servo, servo_four: Servo, servo_ten: Servo):
+    def __init__(self, servo_three: Servo, servo_nine: Servo, servo_one: Servo, servo_seven: Servo, servo_two: Servo, servo_eight: Servo, servo_four: Servo, servo_ten: Servo, imu: IMU):
         """
         Y controller class for moving Astrobee along the y axis. 
 
@@ -48,6 +50,8 @@ class YController:
         # -Ry1
         self.servo_four = servo_four
         self.servo_ten = servo_ten
+
+        self.imu = imu
 
     def move_pos_y(self, duration: int):
         """

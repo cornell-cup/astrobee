@@ -6,9 +6,6 @@ from .servo import Servo
 from .x_controller import XController
 from .y_controller import YController
 from .z_controller import ZController
-from .pitch_controller import PitchController
-from .yaw_controller import YawController
-from .roll_controller import RollController
 
 """
 A simple file that constructs all of the default objects for the XRP robot

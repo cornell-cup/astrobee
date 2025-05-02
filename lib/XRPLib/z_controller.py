@@ -1,4 +1,5 @@
 from .servo import Servo
+from .imu import IMU
 import time
 import math 
 
@@ -21,11 +22,12 @@ class ZController:
                 Servo.get_default_servo(3),
                 Servo.get_default_servo(7),
                 Servo.get_default_servo(1),
-                Servo.get_default_servo(9)
+                Servo.get_default_servo(9),
+                IMU.get_default_imu()
             )
         return cls._DEFAULT_Z_CONTROLLER_INSTANCE
 
-    def __init__(self, servo_four: Servo, servo_eight: Servo, servo_two: Servo, servo_ten: Servo, servo_three: Servo, servo_seven: Servo, servo_one: Servo, servo_nine: Servo):
+    def __init__(self, servo_four: Servo, servo_eight: Servo, servo_two: Servo, servo_ten: Servo, servo_three: Servo, servo_seven: Servo, servo_one: Servo, servo_nine: Servo, imu: IMU):
         """
         Z controller class for moving Astrobee along the z axis. 
 
@@ -47,7 +49,8 @@ class ZController:
         # -Rz1
         self.servo_one = servo_one
         self.servo_nine = servo_nine
-    
+
+        self.imu = imu
 
     def move_pos_z(self, duration: int):
         """

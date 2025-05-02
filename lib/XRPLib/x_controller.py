@@ -1,6 +1,7 @@
 from .pins import *
 from .dc_motor_group import DCMotorGroup
 from .servo import Servo
+from .imu import IMU
 import time
 import math 
 
@@ -23,11 +24,12 @@ class XController:
                 Servo.get_default_servo(1),
                 Servo.get_default_servo(3),
                 Servo.get_default_servo(2),
-                Servo.get_default_servo(4)
+                Servo.get_default_servo(4),
+                IMU.get_default_imu()
             )
         return cls._DEFAULT_X_CONTROLLER_INSTANCE
 
-    def __init__(self, servo_eleven: Servo, servo_twelve: Servo, servo_five: Servo, servo_six: Servo, servo_one: Servo, servo_three: Servo, servo_two: Servo, servo_four: Servo):
+    def __init__(self, servo_eleven: Servo, servo_twelve: Servo, servo_five: Servo, servo_six: Servo, servo_one: Servo, servo_three: Servo, servo_two: Servo, servo_four: Servo, imu: IMU):
         """
         X controller class for moving Astrobee along the x axis. 
 
@@ -48,6 +50,8 @@ class XController:
         # -Rx1
         self.servo_two = servo_two
         self.servo_four = servo_four
+
+        self.imu = imu
 
     def move_pos_x(self, duration: int):
         """
