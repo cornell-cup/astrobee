@@ -30,5 +30,5 @@ SERVO_PIN12 = 25
 # 10 - 30
 # 8 - 24 tried to move
 # ================================ BUTTON PINS ================================ #
-SELECT_BUTTON_PIN = 38
-START_STOP_BUTTON_PIN = 39
+SELECT_BUTTON_PIN = 39
+START_STOP_BUTTON_PIN = 38
