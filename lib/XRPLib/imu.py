@@ -7,7 +7,6 @@ try:
     from .imu_defs import *
     from uctypes import struct, addressof
 except (TypeError, ModuleNotFoundError):
-    LSM_ADDR_PRIMARY = 0x6A
     # Import wrapped in a try/except so that autodoc generation can process properly
     pass
 from machine import I2C, Pin, Timer, disable_irq, enable_irq
@@ -20,15 +19,19 @@ class IMU():
     @classmethod
     def get_default_imu(cls):
         """
-        Get the default XRP IMU instance. This is a singleton, so only one instance of the drivetrain will ever exist.
+        Get the default XRP v2 IMU instance. This is a singleton, so only one instance of the drivetrain will ever exist.
         """
 
         if cls._DEFAULT_IMU_INSTANCE is None:
-            cls._DEFAULT_IMU_INSTANCE = cls()  
+            cls._DEFAULT_IMU_INSTANCE = cls(
+                scl_pin="SCL1",
+                sda_pin="SDA1",
+                addr=LSM_ADDR_PRIMARY
+            )  
             cls._DEFAULT_IMU_INSTANCE.calibrate()
         return cls._DEFAULT_IMU_INSTANCE
 
-    def __init__(self, scl_pin: int|str = "I2C_SCL_1", sda_pin: int|str = "I2C_SDA_1", addr=LSM_ADDR_PRIMARY):
+    def __init__(self, scl_pin: int, sda_pin: int, addr):
         # I2C values
         self.i2c = I2C(id=1, scl=Pin(scl_pin), sda=Pin(sda_pin), freq=400000)
         self.addr = addr
@@ -58,10 +61,8 @@ class IMU():
             pass
         
         # Reset sensor to clear any previous configuration
-        # reset() also sets the board to the default config
         self.reset()
         
-    def _default_config(self):
         # Enable block data update
         self._set_bdu()
 
@@ -185,17 +186,10 @@ class IMU():
                 # Check if register has returned to default value (0x04)
                 self.reg_ctrl3_c_byte[0] = self._getreg(LSM_REG_CTRL3_C)
                 if self.reg_ctrl3_c_byte[0] == 0x04:
-                    self._default_config()
-                    self._start_timer()
                     return True
             # Timeout occurred
-            # Attempt to set default config anyways
-            self._default_config()
-            self._start_timer()
             return False
         else:
-            self._default_config()
-            self._start_timer()
             return True
 
     def get_acc_x(self):

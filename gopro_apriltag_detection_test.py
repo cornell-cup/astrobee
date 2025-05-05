@@ -4,10 +4,10 @@ from pupil_apriltags import Detector
 
 # === USER CONFIGURATION ===
 # video_path = "/Users/SanjanaNandi/Desktop/GX010001.MP4"         # Replace with your GoPro video file
-# video_path = "/Users/SanjanaNandi/Desktop/GX010020.MP4"
-video_path = "/Users/SanjanaNandi/Desktop/GX010019.MP4"
+video_path = "/Users/SanjanaNandi/Desktop/GX010020.MP4"
+# video_path = "/Users/SanjanaNandi/Desktop/GX010019.MP4"
 
-frame_skip = 10                      # Process every Nth frame for speed
+frame_skip = 1                      # Process every Nth frame for speed
 resize_width = 1280                 # Resize width for faster detection (set None to skip)
 display = True                      # Show live preview with detections
 

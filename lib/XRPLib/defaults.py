@@ -1,11 +1,9 @@
 from .board import Board
-from .dc_motor import DCMotor
-from .dc_motor_group import DCMotorGroup
-from .imu import IMU
+# from .imu import IMU
 from .servo import Servo
-from .x_controller import XController
-from .y_controller import YController
-from .z_controller import ZController
+from .x_controller_async import XController
+from .y_controller_async import YController
+from .z_controller_async import ZController
 
 """
 A simple file that constructs all of the default objects for the XRP robot
@@ -13,11 +11,7 @@ Run "from XRPLib.defaults import *" to use
 """
 board = Board.get_default_board()
 
-motor_one = DCMotor.get_default_motor(index=1)
-motor_two = DCMotor.get_default_motor(index=2)
-motor_group = DCMotorGroup.get_default_motor_group()
-
-imu = IMU.get_default_imu()
+# imu = IMU.get_default_imu()
 
 servo_one = Servo.get_default_servo(index=1)
 servo_two = Servo.get_default_servo(index=2)

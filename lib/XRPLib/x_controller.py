@@ -1,7 +1,6 @@
 from .pins import *
-from .dc_motor_group import DCMotorGroup
 from .servo import Servo
-from .imu import IMU
+
 import time
 import math 
 
@@ -24,12 +23,11 @@ class XController:
                 Servo.get_default_servo(1),
                 Servo.get_default_servo(3),
                 Servo.get_default_servo(2),
-                Servo.get_default_servo(4),
-                IMU.get_default_imu()
+                Servo.get_default_servo(4)
             )
         return cls._DEFAULT_X_CONTROLLER_INSTANCE
 
-    def __init__(self, servo_eleven: Servo, servo_twelve: Servo, servo_five: Servo, servo_six: Servo, servo_one: Servo, servo_three: Servo, servo_two: Servo, servo_four: Servo, imu: IMU):
+    def __init__(self, servo_eleven: Servo, servo_twelve: Servo, servo_five: Servo, servo_six: Servo, servo_one: Servo, servo_three: Servo, servo_two: Servo, servo_four: Servo):
         """
         X controller class for moving Astrobee along the x axis. 
 
@@ -51,8 +49,6 @@ class XController:
         self.servo_two = servo_two
         self.servo_four = servo_four
 
-        self.imu = imu
-
     def move_pos_x(self, duration: int):
         """
         Move in +x direction for a specified number of seconds. 
@@ -60,13 +56,13 @@ class XController:
         :param duration: how long to move in +X direction.
         :type duration: int
         """
-        self.servo_eleven.set_servo_angle(Servo.OPEN)
-        self.servo_twelve.set_servo_angle(Servo.OPEN)
+        self.servo_eleven.open()
+        self.servo_twelve.open()
 
         time.sleep(duration)
 
-        self.servo_eleven.set_servo_angle(Servo.CLOSE)
-        self.servo_twelve.set_servo_angle(Servo.CLOSE)
+        self.servo_eleven.close()
+        self.servo_twelve.close()
 
     def move_neg_x(self, duration: int): 
         """
@@ -75,13 +71,13 @@ class XController:
         :param duration: how long to move in -x direction.
         :type duration: int
         """        
-        self.servo_five.set_servo_angle(Servo.OPEN)
-        self.servo_six.set_servo_angle(Servo.OPEN)
+        self.servo_five.open()
+        self.servo_six.open()
 
         time.sleep(duration)
 
-        self.servo_five.set_servo_angle(Servo.CLOSE)
-        self.servo_six.set_servo_angle(Servo.CLOSE)
+        self.servo_five.close()
+        self.servo_six.close()
 
     def pos_rot_x(self, degree: int = None, duration: int = None):
         """
@@ -98,13 +94,13 @@ class XController:
                 print("Either degree or duration needs to be specified.")
                 return
             else:
-                self.servo_one.set_servo_angle(Servo.OPEN)
-                self.servo_three.set_servo_angle(Servo.OPEN)
+                self.servo_one.open()
+                self.servo_three.open()
 
                 time.sleep(duration)
 
-                self.servo_one.set_servo_angle(Servo.CLOSE)
-                self.servo_three.set_servo_angle(Servo.CLOSE)
+                self.servo_one.close()
+                self.servo_three.close()
         else:
             if duration is not None:
                 print("Degree and duration cannot both be specified")
@@ -126,13 +122,13 @@ class XController:
                 print("Either degree or duration needs to be specified.")
                 return
             else:
-                self.servo_two.set_servo_angle(Servo.OPEN)
-                self.servo_four.set_servo_angle(Servo.OPEN)
+                self.servo_two.open()
+                self.servo_four.open()
 
                 time.sleep(duration)
 
-                self.servo_two.set_servo_angle(Servo.CLOSE)
-                self.servo_four.set_servo_angle(Servo.CLOSE)
+                self.servo_two.close()
+                self.servo_four.close()
         else:
             if duration is not None:
                 print("Degree and duration cannot both be specified")

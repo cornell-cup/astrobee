@@ -1,17 +1,22 @@
 import time
+from .controller import Controller
 
-class PID():
+"""
+PID controller with exit condition
+"""
 
-    def __init__(self, 
-                 kp,
-                 ki,
-                 kd,
-                 min_output,
-                 max_output,
-                 max_derivative,
-                 max_integral,
-                 tolerance, 
-                 tolerance_count
+class PID(Controller):
+
+    def __init__(self,
+                 kp = 1.0,
+                 ki = 0.0,
+                 kd = 0.0,
+                 min_output = 0.0,
+                 max_output = 1.0,
+                 max_derivative = None,
+                 max_integral = None,
+                 tolerance = 0.1,
+                 tolerance_count = 1
                  ):
         """
         :param kp: proportional gain
@@ -24,7 +29,6 @@ class PID():
         :param tolerance: tolerance for exit condition
         :param tolerance_count: number of times the error needs to be within tolerance for is_done to return True
         """
-        
         self.kp = kp
         self.ki = ki
         self.kd = kd

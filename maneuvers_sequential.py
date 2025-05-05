@@ -2,25 +2,31 @@ from lib.XRPLib.defaults import *
 import time
 import random
 
-THROTTLE = 70
-STEP = 10
 DURATION = 2   
 
 # Getting off of the ground
 def off_the_ground():
-    motor_group.set_group_throttle_cycle(0, THROTTLE, STEP, pause_time=2)
     y_controller.move_pos_y(DURATION)
 
 # Getting back to the ground
 def on_ground():
     y_controller.move_neg_y(DURATION)
-    motor_group.set_group_throttle_cycle(THROTTLE, 0, STEP, pause_time=2)
 
+def stop_everything():
+    for i in range(12):
+        Servo.get_default_servo(i+1).stop_servo()
+        Servo.get_default_servo(i+1).close()
+    
 ## Maneuvers ##
 # 1: Move forward, stop, and move backward along the z axis
 def maneuver_1():
-     # while name is displayed, rise from ground and stop
+    global started
+    
+    # while name is displayed, rise from ground and stop
     off_the_ground()
+    
+    # play the emotion after leaving the ground
+    play_random_emotion()
 
     # go forward along z axis and stop
     z_controller.move_pos_z(DURATION)
@@ -31,10 +37,19 @@ def maneuver_1():
     # go back to ground
     on_ground()
 
+    # indicate that the maneuver
+    started = False
+    
+
 # 2. Move forward, stop, and move backward along the x axis
 def maneuver_2():
+    global started
+    
     # while name is displayed, rise from ground and stop
     off_the_ground()
+    
+    # play the emotion after leaving the ground
+    play_random_emotion()
 
     # go forward along x axis and stop
     x_controller.move_pos_x(DURATION)
@@ -44,6 +59,9 @@ def maneuver_2():
 
     # go back to ground
     on_ground()
+    
+    # # indicate that the maneuver
+    # started = False
 
 # 3. Move forward, stop, and move backward along the y axis
 def maneuver_3():
@@ -207,29 +225,54 @@ def maneuver_12():
     # go back to ground
     on_ground()
 
-def main():
-    maneuver_names = ["M1: Z-Trans OL", "M2: X-Trans OL", "M3: Y-Trans OL", "M4: X-Rot OL", "M5: Y-Rot OL", "M6: Z-Rot OL", "M7: Z-Trans CL", "M8: X-Trans CL", "M9: Y-Trans CL", "M10: X-Rot CL", "M11: Y-Rot CL", "M12: Z-Rot CL"]
-    full_emotions = ["startled", "big_yes", "big_no", "surprise2", "neutral", "happy2", "love_it", "ready_to_race", "vomit", "chuckle", "excited", "blink_awake"]
-    emotions = full_emotions.copy()
+def test():
+    global started
+    print("Test")
+    time.sleep(1)
+    play_random_emotion()
+    started = False
+    
+def play_random_emotion():
+    global emotions, full_emotions
+    if len(emotions) == 0:
+        emotions = full_emotions.copy()
+    random_int = random.randint(0, len(emotions)-1)  # inclusive of both 0 and len(emotions)-1
+    emotion_playing = emotions[random_int]
+    print(f"SPR,{emotion_playing}")
+    emotions.pop(random_int)
 
-    index = 0    
-    while True:
-        chosen = maneuver_names[index]
-        print(f"ASK,{chosen}")
+maneuver_names = ["M1: Z-Trans OL", "M2: X-Trans OL", "M3: Y-Trans OL", "M4: X-Rot OL", "M5: Y-Rot OL", "M6: Z-Rot OL", "M7: Z-Trans CL", "M8: X-Trans CL", "M9: Y-Trans CL", "M10: X-Rot CL", "M11: Y-Rot CL", "M12: Z-Rot CL"]
+full_emotions = ["startled", "big_yes", "big_no", "surprise2", "neutral", "happy2", "love_it", "ready_to_race", "vomit", "chuckle", "excited", "blink_awake"]
+emotions = full_emotions.copy()
 
-        if board.is_select_pressed() is True:
-            index = index + 1
-            index = index % len(maneuver_names)
-        elif board.is_start_stop_pressed() is True:
-            random_int = random.randint(0, len(emotions)-1)  # inclusive of both 0 and len(emotions)-1
-            emotion_playing = emotions[random_int]
-            print(f"SPR,{emotion_playing}")
-            emotions.pop(random_int)
+index = 0
+started = False
+chosen_maneuver = None
+print(f"ASK,{maneuver_names[0]}")
 
-            if len(full_emotions) == 0:
-                emotions = full_emotions.copy()
-
+while True:
+    if board.is_select_pressed() is True and started is False:
+        time.sleep(1)
+        
+        index = index + 1
+        index = index % len(maneuver_names)
+        chosen_maneuver = maneuver_names[index]
+        print(f"ASK,{chosen_maneuver}")
+    elif board.is_start_stop_pressed() is True:
+        # STOP a maneuver
+        if started is True: 
+            print(f"ASK,Stopped M{index+1}")
+            started = False
+            time.sleep(1)
+            stop_everything()
+            
+        # START a maneuver
+        elif started is False:
+            print(f"ASK,Started M{index+1}")
+            time.sleep(1)
+            started = True
+            
             method_name = f"maneuver_{index+1}"
-            globals()[method_name]()
-
-main()
+            
+            if method_name == "maneuver_1":
+                globals()[method_name]()

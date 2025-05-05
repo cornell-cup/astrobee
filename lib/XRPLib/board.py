@@ -1,7 +1,6 @@
 from machine import Pin, ADC, Timer
 from neopixel import NeoPixel
 import time
-import sys
 from .pins import *
 
 class Board:
@@ -14,14 +13,12 @@ class Board:
         Get the default board instance. This is a singleton, so only one instance of the board will ever exist.
         """
         if cls._DEFAULT_BOARD_INSTANCE is None:
-            cls._DEFAULT_BOARD_INSTANCE = cls()
+            cls._DEFAULT_BOARD_INSTANCE = cls("VIN_MEAS","USER_BUTTON")
         return cls._DEFAULT_BOARD_INSTANCE
 
-    def __init__(self, vin_pin="BOARD_VIN_MEASURE", button_pin="BOARD_USER_BUTTON", 
-                 rgb_led_pin = "BOARD_NEOPIXEL", led_pin = "LED", select_button_pin=SELECT_BUTTON_PIN, 
-                 start_stop_button_pin=START_STOP_BUTTON_PIN):
+    def __init__(self, vin_pin:int, button_pin:int):
         """
-        Implements for extra features on the XRP board. Handles the on/off switch, button, and LED.
+        Implements for extra features on the XRP v2 board. Handles the on/off switch, button, and LED.
 
         :param vin_pin: The pin the on/off switch is connected to
         :type vin_pin: int
@@ -32,18 +29,15 @@ class Board:
         self.on_switch = ADC(Pin(vin_pin))
         
         self.button = Pin(button_pin, Pin.IN, Pin.PULL_UP)
-
-        self.led = Pin(led_pin, Pin.OUT)
-
-        if hasattr(Pin.board, rgb_led_pin):
-            self.rgb_led = NeoPixel(Pin(rgb_led_pin, Pin.OUT), 1)
+        self.select_button = Pin(SELECT_BUTTON_PIN, Pin.IN, Pin.PULL_UP) 
+        self.start_stop_button = Pin(START_STOP_BUTTON_PIN, Pin.IN, Pin.PULL_UP)
+        
+        self.led = Pin("LED", Pin.OUT)
+        self.rgb_led = NeoPixel(Pin("RGB_LED", Pin.OUT), 1)
         # A timer ID of -1 is a virtual timer.
         # Leaves the hardware timers for more important uses
         self._virt_timer = Timer(-1)
         self.is_led_blinking = False
-
-        self.select_button = Pin(select_button_pin, Pin.IN, Pin.PULL_UP)
-        self.start_stop_button = Pin(start_stop_button_pin, Pin.IN, Pin.PULL_UP)
 
 
     def are_motors_powered(self) -> bool:
@@ -61,24 +55,28 @@ class Board:
         :rtype: bool
         """
         return not self.button.value()
-    
+        
     def is_select_pressed(self) -> bool:
-        """
-        Returns the state of the select button. 
-
-        :return: True if the select button is pressed, False otherwise
-        :rtype: bool
-        """
-        return not self.select_button.value()
-    
+        result = self.select_button.value() != 1
+        return result
+            
     def is_start_stop_pressed(self) -> bool:
+        result = self.start_stop_button.value() != 1
+        return result
+        
+    def wait_for_button(self):
         """
-        Returns the state of the start/stop button. 
+        Halts the program until the button is pressed
+        """
 
-        :return: True if the start/stop button is pressed, False otherwise
-        :rtype: bool
-        """
-        return not self.start_stop_button.value()
+        # Wait until user command before running
+        while not self.is_button_pressed():
+            time.sleep(.01)
+
+        # Wait until user to release button before running
+        while self.is_button_pressed():
+            time.sleep(.01)
+
     
     def led_on(self):
         """
@@ -119,19 +117,5 @@ class Board:
             self.is_led_blinking = False
 
     def set_rgb_led(self, r:int, g:int, b:int):
-        """
-        Sets the Neopixel RGB LED to a specified color. Throws a NotImplementedError on the XRP Beta
-
-        :param r: The amount of red in the desired color
-        :type r: int
-        :param g: The amount of green in the desired color
-        :type g: int
-        :param b: The amount of blue in the desired color
-        :type b: int
-        """
-        if "rgb_led" in self.__dict__:
-            self.rgb_led[0] = (r, g, b)
-            self.rgb_led.write()
-        else:
-            raise NotImplementedError("Board.set_rgb_led not implemented for the XRP Beta")
-        
+        self.rgb_led[0] = (r, g, b)
+        self.rgb_led.write()

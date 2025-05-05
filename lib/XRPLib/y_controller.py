@@ -1,7 +1,5 @@
 from .pins import *
-from .dc_motor_group import DCMotorGroup
 from .servo import Servo
-from .imu import IMU
 import time
 import math 
 
@@ -24,12 +22,11 @@ class YController:
                 Servo.get_default_servo(2),
                 Servo.get_default_servo(8),
                 Servo.get_default_servo(4),
-                Servo.get_default_servo(10), 
-                IMU.get_default_imu()
+                Servo.get_default_servo(10)
             )
         return cls._DEFAULT_Y_CONTROLLER_INSTANCE
 
-    def __init__(self, servo_three: Servo, servo_nine: Servo, servo_one: Servo, servo_seven: Servo, servo_two: Servo, servo_eight: Servo, servo_four: Servo, servo_ten: Servo, imu: IMU):
+    def __init__(self, servo_three: Servo, servo_nine: Servo, servo_one: Servo, servo_seven: Servo, servo_two: Servo, servo_eight: Servo, servo_four: Servo, servo_ten: Servo):
         """
         Y controller class for moving Astrobee along the y axis. 
 
@@ -51,7 +48,6 @@ class YController:
         self.servo_four = servo_four
         self.servo_ten = servo_ten
 
-        self.imu = imu
 
     def move_pos_y(self, duration: int):
         """
@@ -60,13 +56,13 @@ class YController:
         :param duration: seconds to move in +y direction.
         :type duration: int
         """
-        self.servo_three.set_servo_angle(Servo.OPEN)
-        self.servo_nine.set_servo_angle(Servo.OPEN)
+        self.servo_three.open()
+        self.servo_nine.open()
 
         time.sleep(duration)
 
-        self.servo_three.set_servo_angle(Servo.CLOSE)
-        self.servo_nine.set_servo_angle(Servo.CLOSE)
+        self.servo_three.close()
+        self.servo_nine.close()
 
     def move_neg_y(self, duration: int): 
         """
@@ -75,13 +71,13 @@ class YController:
         :param duration: seconds to move in =y direction.
         :type duration: int
         """        
-        self.servo_one.set_servo_angle(Servo.OPEN)
-        self.servo_seven.set_servo_angle(Servo.OPEN)
+        self.servo_one.open()
+        self.servo_seven.open()
 
         time.sleep(duration)
 
-        self.servo_one.set_servo_angle(Servo.CLOSE)
-        self.servo_seven.set_servo_angle(Servo.CLOSE)
+        self.servo_one.close()
+        self.servo_seven.close()
 
     def pos_rot_y(self, degree: int = None, duration: int = None):
         """
@@ -98,13 +94,13 @@ class YController:
                 print("Either degree or duration needs to be specified.")
                 return
             else:
-                self.servo_two.set_servo_angle(Servo.OPEN)
-                self.servo_eight.set_servo_angle(Servo.OPEN)
+                self.servo_two.open()
+                self.servo_eight.open()
 
                 time.sleep(duration)
 
-                self.servo_two.set_servo_angle(Servo.CLOSE)
-                self.servo_eight.set_servo_angle(Servo.CLOSE)
+                self.servo_two.close()
+                self.servo_eight.close()
         else:
             if duration is not None:
                 print("Degree and duration cannot both be specified")
@@ -126,13 +122,13 @@ class YController:
                 print("Either degree or duration needs to be specified.")
                 return
             else:
-                self.servo_four.set_servo_angle(Servo.OPEN)
-                self.servo_ten.set_servo_angle(Servo.OPEN)
+                self.servo_four.open()
+                self.servo_ten.open()
 
                 time.sleep(duration)
 
-                self.servo_four.set_servo_angle(Servo.CLOSE)
-                self.servo_ten.set_servo_angle(Servo.CLOSE)
+                self.servo_four.close()
+                self.servo_ten.close()
         else:
             if duration is not None:
                 print("Degree and duration cannot both be specified")

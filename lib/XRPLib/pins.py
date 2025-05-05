@@ -1,24 +1,34 @@
 # TODO: replace with actual pin numbers
 
 # ================================ SERVO PINS ================================ #
-SERVO_PIN1 = None  
-SERVO_PIN2 = 16 # 16 has issue half way close
-SERVO_PIN3 = 13 # 13 not closing or opening all the way
-SERVO_PIN4 = 12  
-SERVO_PIN5 = None
-SERVO_PIN6 = 17  
-SERVO_PIN7 = 18  # 18 not closing all the way
-SERVO_PIN8 = 11  
-SERVO_PIN9 = 10  
-SERVO_PIN10 = 19  
-SERVO_PIN11 = 20  
-SERVO_PIN12 = None
-
-# ================================ MOTOR PINS ================================ #
-ESC_PIN_1 = 16 
-ESC_PIN_2 = 17
+SERVO_PIN1 = 36  
+SERVO_PIN2 = 33 
+SERVO_PIN3 = 23 
+SERVO_PIN4 = 0  
+SERVO_PIN5 = 1
+SERVO_PIN6 = 35  
+SERVO_PIN7 = 34 
+SERVO_PIN8 = 24  # not working 
+SERVO_PIN9 = 32  
+SERVO_PIN10 = 30  # not working
+SERVO_PIN11 = 31  
+SERVO_PIN12 = 25
 
 
+# 1 - 36
+# 7 - 34 
+# 5 - 1
+# 6 - 35
+# 2 - 33
+# 11 - 31
+# 12 - 25
+# 4 - 0
+# 9 - 32
+# 3 - 23
+
+# not moving 
+# 10 - 30
+# 8 - 24 tried to move
 # ================================ BUTTON PINS ================================ #
-SELECT_BUTTON_PIN = None
-START_STOP_BUTTON_PIN = None
+SELECT_BUTTON_PIN = 38
+START_STOP_BUTTON_PIN = 39

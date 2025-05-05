@@ -22,12 +22,11 @@ class ZController:
                 Servo.get_default_servo(3),
                 Servo.get_default_servo(7),
                 Servo.get_default_servo(1),
-                Servo.get_default_servo(9),
-                IMU.get_default_imu()
+                Servo.get_default_servo(9)            
             )
         return cls._DEFAULT_Z_CONTROLLER_INSTANCE
 
-    def __init__(self, servo_four: Servo, servo_eight: Servo, servo_two: Servo, servo_ten: Servo, servo_three: Servo, servo_seven: Servo, servo_one: Servo, servo_nine: Servo, imu: IMU):
+    def __init__(self, servo_four: Servo, servo_eight: Servo, servo_two: Servo, servo_ten: Servo, servo_three: Servo, servo_seven: Servo, servo_one: Servo, servo_nine: Servo):
         """
         Z controller class for moving Astrobee along the z axis. 
 
@@ -50,8 +49,6 @@ class ZController:
         self.servo_one = servo_one
         self.servo_nine = servo_nine
 
-        self.imu = imu
-
     def move_pos_z(self, duration: int):
         """
         Move in +z direction. 
@@ -59,13 +56,13 @@ class ZController:
         :param duration: seconds to move in +z direction.
         :type duration: int
         """        
-        self.servo_four.set_servo_angle(Servo.OPEN)
-        self.servo_eight.set_servo_angle(Servo.OPEN)
+        self.servo_four.open()
+        self.servo_eight.open()
 
         time.sleep(duration)
 
-        self.servo_four.set_servo_angle(Servo.CLOSE)
-        self.servo_eight.set_servo_angle(Servo.CLOSE)
+        self.servo_four.close()
+        self.servo_eight.close()
 
 
     def move_neg_z(self, duration: int): 
@@ -75,13 +72,13 @@ class ZController:
         :param duration: seconds to move in -z direction.
         :type duration: int
         """
-        self.servo_two.set_servo_angle(Servo.OPEN)
-        self.servo_ten.set_servo_angle(Servo.OPEN)
+        self.servo_two.open()
+        self.servo_ten.open()
 
         time.sleep(duration)
 
-        self.servo_two.set_servo_angle(Servo.CLOSE)
-        self.servo_ten.set_servo_angle(Servo.CLOSE)
+        self.servo_two.close()
+        self.servo_ten.close()
 
     def pos_rot_z(self, degree: int = None, duration: int = None):
         """
@@ -98,13 +95,13 @@ class ZController:
                 print("Either degree or duration needs to be specified.")
                 return
             else:
-                self.servo_three.set_servo_angle(Servo.OPEN)
-                self.servo_seven.set_servo_angle(Servo.OPEN)
+                self.servo_three.open()
+                self.servo_seven.open()
 
                 time.sleep(duration)
 
-                self.servo_three.set_servo_angle(Servo.CLOSE)
-                self.servo_seven.set_servo_angle(Servo.CLOSE)
+                self.servo_three.close()
+                self.servo_seven.close()
         elif degree is not None:
             if duration is not None:
                 print("Degree and duration cannot both be specified")
@@ -126,13 +123,13 @@ class ZController:
                 print("Either degree or duration needs to be specified.")
                 return
             else:
-                self.servo_one.set_servo_angle(Servo.OPEN)
-                self.servo_nine.set_servo_angle(Servo.OPEN)
+                self.servo_one.open()
+                self.servo_nine.open()
 
                 time.sleep(duration)
 
-                self.servo_one.set_servo_angle(Servo.CLOSE)
-                self.servo_nine.set_servo_angle(Servo.CLOSE)
+                self.servo_one.close()
+                self.servo_nine.close()
         elif degree is not None:
             if duration is not None:
                 print("Degree and duration cannot both be specified")
