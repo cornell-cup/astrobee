@@ -1,16 +1,16 @@
 # TODO: replace with actual pin numbers
 
 # ================================ SERVO PINS ================================ #
-SERVO_PIN1 = 36  
-SERVO_PIN2 = 33 
-SERVO_PIN3 = 23 
-SERVO_PIN4 = 0  
+SERVO_PIN1 = None  
+SERVO_PIN2 = None 
+SERVO_PIN3 = None 
+SERVO_PIN4 = None  
 SERVO_PIN5 = 24
-SERVO_PIN6 = 25  
-SERVO_PIN7 = 34 
-SERVO_PIN8 = 24  # not working 
-SERVO_PIN9 = 32  
-SERVO_PIN10 = 30  # not working
+SERVO_PIN6 = 25  # Doesn't work
+SERVO_PIN7 = None 
+SERVO_PIN8 = None  # not working 
+SERVO_PIN9 = None  
+SERVO_PIN10 = None  # not working
 SERVO_PIN11 = 33  
 SERVO_PIN12 = 0
 
