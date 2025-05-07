@@ -165,7 +165,6 @@ class Servo:
         pulsewidth = self.MIN_US + (self.MAX_US - self.MIN_US) * angle / 180
         duty = self.us_to_duty(pulsewidth)
         self._servo.duty_u16(duty)
-        # servo_pwm.duty_u16(duty)
         # print(f"Moved servo to {angle} degrees (pulse {pulsewidth:.1f}us)")
 
     def open(self):
