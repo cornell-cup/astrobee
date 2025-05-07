@@ -1,4 +1,11 @@
-Use the straight() and turn() methods in lib/XRPLib/differential_drive.py as reference for implementing the methods in the controller files (x_controller.py, etc.)
+# Astrobee
+[Description of what Astrobee is] 
+[How we are making Astrobee using XRP]
 
-All the hardware is defined in lib/XRPLib/defaults.py which is imported at the top
-of every controller file. So just call dc_motor_group.method() or servo_one.set_servo_angle() to use them. 
+#### Up to date as of May 7, 2025.
+
+[insert picture of Astrobee here]
+
+Talk about fans (motors) and vents (servos). Specific vents need to open while fans run for it to do specific translations/rotations. 
+
+[Put mapping between servos labeled on the picture and movements here.] 
