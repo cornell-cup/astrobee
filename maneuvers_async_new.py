@@ -91,9 +91,9 @@ async def maneuver_2():
     try:
         await asyncio.sleep_ms(2500)
         play_random_emotion()
-        await y_controller.pos_rot_y(DURATION_1)
-        await y_controller.neg_rot_y(2*DURATION_1)
-        await y_controller.pos_rot_y(DURATION_1)
+        await y_controller.pos_rot_y(duration=DURATION_1)
+        await y_controller.neg_rot_y(duration=2*DURATION_1)
+        await y_controller.pos_rot_y(duration=DURATION_1)
     except asyncio.CancelledError:
         stop_everything()
         raise
@@ -105,9 +105,9 @@ async def maneuver_6():
     try:
         await asyncio.sleep_ms(2500)
         play_random_emotion()
-        await y_controller.pos_rot_y(DURATION_2)
-        await y_controller.neg_rot_y(2*DURATION_2)
-        await y_controller.pos_rot_y(DURATION_2)
+        await y_controller.pos_rot_y(duration=DURATION_2)
+        await y_controller.neg_rot_y(duration=2*DURATION_2)
+        await y_controller.pos_rot_y(duration=DURATION_2)
     except asyncio.CancelledError:
         stop_everything()
         raise
@@ -119,9 +119,9 @@ async def maneuver_10():
     try:
         await asyncio.sleep_ms(2500)
         play_random_emotion()
-        await y_controller.pos_rot_y(DURATION_3)
-        await y_controller.neg_rot_y(2*DURATION_3)
-        await y_controller.pos_rot_y(DURATION_3)
+        await y_controller.pos_rot_y(duration=DURATION_3)
+        await y_controller.neg_rot_y(duration=2*DURATION_3)
+        await y_controller.pos_rot_y(duration=DURATION_3)
     except asyncio.CancelledError:
         stop_everything()
         raise
@@ -134,7 +134,7 @@ async def maneuver_3():
         await asyncio.sleep_ms(2500)
         play_random_emotion()
         await x_controller.move_pos_x(DURATION_1)
-        await y_controller.pos_rot_y(DURATION_1)
+        await y_controller.pos_rot_y(duration=DURATION_1)
     except asyncio.CancelledError:
         stop_everything()
         raise
@@ -147,7 +147,7 @@ async def maneuver_7():
         await asyncio.sleep_ms(2500)
         play_random_emotion()
         await x_controller.move_pos_x(DURATION_2)
-        await y_controller.pos_rot_y(DURATION_2)
+        await y_controller.pos_rot_y(duration=DURATION_2)
     except asyncio.CancelledError:
         stop_everything()
         raise
@@ -160,7 +160,7 @@ async def maneuver_11():
         await asyncio.sleep_ms(2500)
         play_random_emotion()
         await x_controller.move_pos_x(DURATION_3)
-        await y_controller.pos_rot_y(DURATION_3)
+        await y_controller.pos_rot_y(duration=DURATION_3)
     except asyncio.CancelledError:
         stop_everything()
         raise
@@ -174,7 +174,7 @@ async def maneuver_4():
         play_random_emotion()
         await x_controller.move_pos_x(DURATION_1)
         await x_controller.move_neg_x(DURATION_1)
-        await y_controller.pos_rot_y(DURATION_1)
+        await y_controller.pos_rot_y(duration=DURATION_1)
     except asyncio.CancelledError:
         stop_everything()
         raise
@@ -188,7 +188,7 @@ async def maneuver_8():
         play_random_emotion()
         await x_controller.move_pos_x(DURATION_2)
         await x_controller.move_neg_x(DURATION_2)
-        await y_controller.pos_rot_y(DURATION_2)
+        await y_controller.pos_rot_y(duration=DURATION_2)
     except asyncio.CancelledError:
         stop_everything()
         raise
@@ -202,7 +202,7 @@ async def maneuver_12():
         play_random_emotion()
         await x_controller.move_pos_x(DURATION_3)
         await x_controller.move_neg_x(DURATION_3)
-        await y_controller.pos_rot_y(DURATION_3)
+        await y_controller.pos_rot_y(duration=DURATION_3)
     except asyncio.CancelledError:
         stop_everything()
         raise
@@ -214,9 +214,9 @@ async def maneuver_13():
     try:
         await asyncio.sleep_ms(2500)
         play_random_emotion()
-        await y_controller.pos_rot_y(DURATION_1)
+        await y_controller.pos_rot_y(duration=DURATION_1)
         await x_controller.move_pos_x(DURATION_1)
-        await y_controller.neg_rot_y(DURATION_1)
+        await y_controller.neg_rot_y(duration=DURATION_1)
         await x_controller.move_neg_x(2*DURATION_1)
     except asyncio.CancelledError:
         stop_everything()
@@ -229,9 +229,9 @@ async def maneuver_15():
     try:
         await asyncio.sleep_ms(2500)
         play_random_emotion()
-        await y_controller.pos_rot_y(DURATION_2)
+        await y_controller.pos_rot_y(duration=DURATION_2)
         await x_controller.move_pos_x(DURATION_2)
-        await y_controller.neg_rot_y(DURATION_2)
+        await y_controller.neg_rot_y(duration=DURATION_2)
         await x_controller.move_neg_x(2*DURATION_2)
     except asyncio.CancelledError:
         stop_everything()
@@ -244,9 +244,9 @@ async def maneuver_18():
     try:
         await asyncio.sleep_ms(2500)
         play_random_emotion()
-        await y_controller.pos_rot_y(DURATION_3)
+        await y_controller.pos_rot_y(duration=DURATION_3)
         await x_controller.move_pos_x(DURATION_3)
-        await y_controller.neg_rot_y(DURATION_3)
+        await y_controller.neg_rot_y(duration=DURATION_3)
         await x_controller.move_neg_x(2*DURATION_3)
     except asyncio.CancelledError:
         stop_everything()
@@ -260,7 +260,7 @@ async def maneuver_14():
         await asyncio.sleep_ms(2500)
         play_random_emotion()
         await x_controller.move_pos_x(DURATION_1)
-        await y_controller.pos_rot_y(DURATION_1)
+        await y_controller.pos_rot_y(duration=DURATION_1)
         await x_controller.move_pos_x(DURATION_1)
     except asyncio.CancelledError:
         stop_everything()
@@ -274,7 +274,7 @@ async def maneuver_16():
         await asyncio.sleep_ms(2500)
         play_random_emotion()
         await x_controller.move_pos_x(DURATION_2)
-        await y_controller.pos_rot_y(DURATION_2)
+        await y_controller.pos_rot_y(duration=DURATION_2)
         await x_controller.move_pos_x(DURATION_2)
     except asyncio.CancelledError:
         stop_everything()
@@ -288,7 +288,7 @@ async def maneuver_19():
         await asyncio.sleep_ms(2500)
         play_random_emotion()
         await x_controller.move_pos_x(DURATION_3)
-        await y_controller.pos_rot_y(DURATION_3)
+        await y_controller.pos_rot_y(duration=DURATION_3)
         await x_controller.move_pos_x(DURATION_3)
     except asyncio.CancelledError:
         stop_everything()
@@ -300,10 +300,10 @@ async def maneuver_19():
 async def maneuver_20():
     try:
         await asyncio.sleep_ms(2500)
-        await y_controller.pos_rot_y(DURATION_1)
-        await y_controller.neg_rot_y(DURATION_1)
-        await y_controller.pos_rot_y(DURATION_1)
-        await y_controller.neg_rot_y(DURATION_1)
+        await y_controller.pos_rot_y(duration=DURATION_1)
+        await y_controller.neg_rot_y(duration=DURATION_1)
+        await y_controller.pos_rot_y(duration=DURATION_1)
+        await y_controller.neg_rot_y(duration=DURATION_1)
     except asyncio.CancelledError:
         stop_everything()
         raise
@@ -330,10 +330,10 @@ async def maneuver_22():
     try:
         await asyncio.sleep_ms(2500)
         play_random_emotion()
-        await y_controller.pos_rot_y(DURATION_2)
-        await y_controller.neg_rot_y(DURATION_2)
-        await y_controller.pos_rot_y(DURATION_2)
-        await y_controller.neg_rot_y(DURATION_2)
+        await y_controller.pos_rot_y(duration=DURATION_2)
+        await y_controller.neg_rot_y(duration=DURATION_2)
+        await y_controller.pos_rot_y(duration=DURATION_2)
+        await y_controller.neg_rot_y(duration=DURATION_2)
     except asyncio.CancelledError:
         stop_everything()
         raise
@@ -360,10 +360,10 @@ async def maneuver_24():
     try:
         await asyncio.sleep_ms(2500)
         play_random_emotion()
-        await y_controller.pos_rot_y(DURATION_3)
-        await y_controller.neg_rot_y(DURATION_3)
-        await y_controller.pos_rot_y(DURATION_3)
-        await y_controller.neg_rot_y(DURATION_3)
+        await y_controller.pos_rot_y(duration=DURATION_3)
+        await y_controller.neg_rot_y(duration=DURATION_3)
+        await y_controller.pos_rot_y(duration=DURATION_3)
+        await y_controller.neg_rot_y(duration=DURATION_3)
     except asyncio.CancelledError:
         stop_everything()
         raise
