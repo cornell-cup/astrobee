@@ -6,7 +6,10 @@ Our project recreates a functional prototype of Astrobee using the XRP robotics 
 
 #### Up to date as of May 7, 2025.
 ![Astrobeen Replica with Labeled Vents](https://github.com/user-attachments/assets/233e7bd6-7513-4d07-aba8-a1956a2d583d)
-*Figure 1: Our Astrobee replica with labeled vents and fan modules and coordinate system.*
+*Figure 1: Our Astrobee replica with labeled vents and fan modules, and coordinate system.*
+
+### Setting up the XRP
+Connect the XRP that will be in the Astrobee via a USB-C cable to your computer. Run the script `setup.sh` included in this repository. Go to xrpcode.wpi.edu and run the script maneuvers_async_new.py and then disconnect the cable connecting the XRP to your computer.
 
 ### Operation
 The interface supports two user-input buttons:
