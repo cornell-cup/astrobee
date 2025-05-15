@@ -8,10 +8,14 @@ Our project recreates a functional prototype of Astrobee using the XRP robotics 
 ![Astrobeen Replica with Labeled Vents](https://github.com/user-attachments/assets/233e7bd6-7513-4d07-aba8-a1956a2d583d)
 *Figure 1: Our Astrobee replica with labeled vents and fan modules, and coordinate system.*
 
-### Setting up the XRP
+---
+
+## Setting up the XRP
 Connect the XRP that will be in the Astrobee via a USB-C cable to your computer. Run the script `setup.sh` included in this repository. Go to xrpcode.wpi.edu and run the script maneuvers_async_new.py and then disconnect the cable connecting the XRP to your computer.
 
-### Operation
+---
+
+## Operation
 The interface supports two user-input buttons:
 
 - Select button (blue): Cycles through a list of predefined maneuvers. Each press advances to the next maneuver and updates the display accordingly.
@@ -42,8 +46,9 @@ During a maneuver, the Astrobee will do the following:
 2. Power off the Astrobee system.
 
 ---
+## Subsystem Architecture
 
-## Propulsion System: Fans and Vents
+### Propulsion System: Fans and Vents
 
 Our replica uses:
 
@@ -78,9 +83,7 @@ Detailed calculations are documented in:
 - [Astrobee Dynamics](https://humorous-scarer-601.notion.site/Astrobee-Dynamics-1ba5e61c54338086a670dc6c97f83654)
 - [Parameters](https://humorous-scarer-601.notion.site/Parameters-1c35e61c5433809589c2e20ca3862add)
 
----
-
-## LCD Screen
+### LCD Screen
 The Astrobee replica includes an onboard LCD screen connected to a Raspberry Pi 0, which acts as a display to see what maneuver is being selected or animated emotional expressions. 
 
 - The LCD screen connects to the Raspberry Pi 0 via GPIO pins.
@@ -98,9 +101,7 @@ To launch the LCD script, use a stylus to tap the PiZeroScript file icon on the 
 
 Note: To verify that the Raspberry Pi has recognized the XRP, run lsusb—a connected MicroPython board should appear in the output.
 
----
-
-## Localization
+### Localization
 To evaluate maneuver performance, the Astrobee includes a visual localization system based on AprilTags. A GoPro is mounted facing the –y direction, recording the robot’s motion over a 5 ft × 5 ft AprilTag mat placed on the floor.
 
 - The mat consists of a 10×10 grid of 80 mm-wide tags, included in this repository.
